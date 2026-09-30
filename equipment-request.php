@@ -54,7 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // {4}    exactly four digits
         // $      end of the value
         // Practice in the live editor: https://regex101.com/
-        
+        $tagPattern = "/.^EQ-\{4}/";
+        $tagResult = preg_match($tagPattern, $assetTag);
+        // echo $tagResult;
 
         /*** Use preg_match() and save its result. ***/
         // 1 means match, 0 means nonmatch
@@ -63,7 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
 
         /*** Step 5: Add an error when the value does not match. ***/
-        
+        if ($tagResult === 0) {
+            $errors['asset_tag'] = 'Use the format EQ-1234.';
+        }
     }
 
     if (empty($errors)) {
